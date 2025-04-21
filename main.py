@@ -96,10 +96,12 @@ async def handle_submission(message, url, is_attachment=False):
     title, description, canceled = await collect_info(thread, message.author)
     
     if not title or not description or canceled:
-        await thread.send("This thread will be deleted in 2 minutes.")
-        # Schedule thread deletion
+        await thread.send("This thread will be closed in 2 minutes.")
+        # Schedule thread archiving instead of deletion
         await asyncio.sleep(120)
-        await thread.delete()
+        print("Thread closed due to cancellation or missing info.")
+        await thread.edit(archived=True)
+        print("Thread closed due to cancellation or missing info.")
         return
     
     # Prepare to send to API
@@ -136,11 +138,11 @@ async def handle_submission(message, url, is_attachment=False):
     except Exception as e:
         await thread.send(f"❌ Error processing your submission: {str(e)}")
     
-    # Notify about thread deletion
-    await thread.send("This thread will be deleted in 2 minutes.")
-    # Schedule thread deletion
+    # Notify about thread archiving instead of deletion
+    await thread.send("This thread will be closed in 2 minutes.")
+    # Schedule thread archiving instead of deletion
     await asyncio.sleep(120)
-    await thread.delete()
+    await thread.edit(archived=True)
 
 @client.event
 async def on_message(message):
