@@ -15,6 +15,19 @@ client = discord.Client(intents=intents)
 # API_URL = "http://localhost:8080/upload"
 API_URL = "https://replay-hub.theclusterflux.com"
 
+#test api by calling the metadata endpoint
+def test_api():
+    try:
+        response = requests.get(f"{API_URL}/metadata")
+        if response.status_code == 200:
+            print("API is reachable.")
+        else:
+            print(f"API returned status code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        print(f"Error connecting to API: {e}")
+        exit(1)
+test_api()
+
 # Whitelist of channel IDs where the bot will respond
 # Replace these with your actual channel IDs
 WHITELISTED_CHANNELS = [
@@ -102,7 +115,7 @@ async def handle_submission(message, url, is_attachment=False):
         data["url"] = url
         print(data)
         
-        response = requests.post(API_URL, data=data)
+        response = requests.post(API_URL+"/upload", data=data)
         
         if response.status_code == 201:
             result = response.json()
