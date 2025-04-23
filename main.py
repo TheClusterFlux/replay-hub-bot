@@ -154,6 +154,14 @@ async def on_message(message):
     if message.channel.id not in WHITELISTED_CHANNELS:
         return  # Ignore messages from non-whitelisted channels
     
+    
+    if message.content.equals("!help"):
+        return await message.channel.send(
+            "This bot currently only accepts direct video uploads or Steam CDN shares. "
+            "Content can be viewed at https://replay-hub.theclusterflux.com."
+            "If you have any questions, please reach out to the admins."
+        )
+    
     print(f"Received message from {message.author} in whitelisted channel: {message.content}")
     print(f"Attachments: {message.attachments}")
     
