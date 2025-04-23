@@ -155,7 +155,7 @@ async def on_message(message):
         return  # Ignore messages from non-whitelisted channels
     
     
-    if message.content.equals("!help"):
+    if message.content == "!help":
         return await message.channel.send(
             "This bot currently only accepts direct video uploads or Steam CDN shares. "
             "Content can be viewed at https://replay-hub.theclusterflux.com."
