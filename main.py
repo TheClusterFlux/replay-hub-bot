@@ -46,7 +46,7 @@ async def on_ready():
 
 def is_video_url(url):
     """Check if a URL likely points to a video file"""
-    if(url.contains("cdn.steamusercontent.com")):
+    if "cdn.steamusercontent.com" in url:
         return True
     video_extensions = ['.mp4', '.mov', '.avi', '.wmv', '.flv', '.mkv', '.webm']
     parsed = urlparse(url)
