@@ -158,7 +158,7 @@ async def on_message(message):
     if message.content == "!help":
         return await message.channel.send(
             "This bot currently only accepts direct video uploads or Steam CDN shares. "
-            "Content can be viewed at https://replay-hub.theclusterflux.com."
+            "Content can be viewed at https://replay-hub.theclusterflux.com. "
             "If you have any questions, please reach out to the admins."
         )
     
